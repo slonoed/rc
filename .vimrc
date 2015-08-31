@@ -17,39 +17,61 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
-" подстветка json'а
+" Bracket highlights
+Plugin 'luochen1990/rainbow'
+let g:rainbow_active = 1
+let g:rainbow_operators = 1
+let g:rainbow_conf = {
+\   'guifgs': ['darkorange3', 'seagreen3', 'firebrick'],
+\   'ctermfgs': ['darkgreen', 29, 'darkcyan', 97],
+\   'operators': '',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       'tex': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\       },
+\       'lisp': {
+\           'guifgs': ['darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'css': 0,
+\   }
+\}
+
+" JSON highlight
 Plugin 'elzr/vim-json'
+
 
 " :NERDTree
 Bundle 'scrooloose/nerdtree'
-" open tree if no file
- autocmd vimenter * if !argc() | NERDTree | endif
-" open with Ctrl-n
-map <C-n> :NERDTreeToggle<CR>
-
 Bundle 'jistr/vim-nerdtree-tabs'
+" Open NERDTree on vim startup
+let g:nerdtree_tabs_open_on_console_startup = 1
+nnoremap tc  :tabnew<CR>
 nnoremap th  :tabfirst<CR>
 nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
+nnoremap tk  :tablast<CR>
+nnoremap tl  :tabprev<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
-" tab navigation like firefox
-nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <C-tab>   :tabnext<CR>
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-inoremap <C-tab>   <Esc>:tabnext<CR>i
-inoremap <C-t>     <Esc>:tabnew<CR>
+" open NERDTree for all tabs with Ctrl-n
+map <C-n> :NERDTreeTabsToggle<CR>
+
 
 Bundle 'L9'
 
 Bundle 'surround.vim'
 
-" Поиск файлов
+" Find files in curernt dir with ctrl+p
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -74,7 +96,13 @@ Plugin 'mattn/emmet-vim'
 
 Plugin 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
-" All of your Plugins must be added before the following line
+
+" Clojurescript plugins
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'
+Plugin 'guns/vim-clojure-highlight'
+
+" All oa your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -82,3 +110,4 @@ filetype on
 filetype plugin on
 au BufNewFile,BufRead *.tt2 set filetype=html
 au BufNewFile,BufRead *.bemhtml set filetype=javascript
+au BufNewFile,BufRead *.cljs set filetype=clojure
