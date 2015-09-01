@@ -43,7 +43,7 @@ let g:rainbow_conf = {
 \       'css': 0,
 \   }
 \}
-
+        
 " JSON highlight
 Plugin 'elzr/vim-json'
 
@@ -64,10 +64,10 @@ nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
 " open NERDTree for all tabs with Ctrl-n
-map <C-n> :NERDTreeTabsToggle<CR>
+map <C-t> :NERDTreeTabsToggle<CR>
 
 
-Bundle 'L9'
+"Bundle 'L9'
 
 Bundle 'surround.vim'
 
