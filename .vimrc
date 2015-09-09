@@ -50,36 +50,47 @@ Plugin 'elzr/vim-json'
 
 " :NERDTree
 Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-" Open NERDTree on vim startup
-let g:nerdtree_tabs_open_on_console_startup = 1
-nnoremap tc  :tabnew<CR>
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tablast<CR>
-nnoremap tl  :tabprev<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+" Bundle 'jistr/vim-nerdtree-tabs'
+" " Open NERDTree on vim startup
+" let g:nerdtree_tabs_open_on_console_startup = 1
+" nnoremap tc  :tabnew<CR>
+" nnoremap th  :tabfirst<CR>
+" nnoremap tj  :tabnext<CR>
+" nnoremap tk  :tablast<CR>
+" nnoremap tl  :tabprev<CR>
+" nnoremap tt  :tabedit<Space>
+" nnoremap tn  :tabnext<Space>
+" nnoremap tm  :tabm<Space>
+" nnoremap td  :tabclose<CR>
+"
+" Open tree if no files opened
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+Plugin 'mileszs/ack.vim'
 
 " open NERDTree for all tabs with Ctrl-n
-map <C-t> :NERDTreeTabsToggle<CR>
-
+map <C-t> :NERDTreeToggle<CR>
 
 "Bundle 'L9'
 
 Bundle 'surround.vim'
 
+" Edit parentheses
+Plugin 'vim-scripts/paredit.vim'
+
 " Find files in curernt dir with ctrl+p
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+map <C-b> :CtrlPBuffer<CR>
 
 " Инденты
 set smartindent
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 Bundle 'The-NERD-Commenter'
@@ -101,6 +112,17 @@ let g:syntastic_javascript_checkers = ['eslint']
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
 Plugin 'guns/vim-clojure-highlight'
+Plugin 'tpope/vim-salve'
+
+
+" Move swp? files to tmp directory
+" Usefull for soft like boot
+" boot rebuild if files added or changed  
+" set backup
+"set swapfile
+"set backupdir=/tmp/vim-tmp
+"set directory=/tmp/vim-tmp
+
 
 " All oa your Plugins must be added before the following line
 call vundle#end()            " required
