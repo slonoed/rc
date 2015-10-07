@@ -77,8 +77,11 @@ map <C-t> :NERDTreeToggle<CR>
 
 Bundle 'surround.vim'
 
+" Git
+Plugin 'tpope/vim-fugitive'
+
 " Edit parentheses
-Plugin 'vim-scripts/paredit.vim'
+" Plugin 'vim-scripts/paredit.vim'
 
 " Find files in curernt dir with ctrl+p
 Bundle 'kien/ctrlp.vim'
@@ -97,6 +100,20 @@ Bundle 'The-NERD-Commenter'
 
 Plugin 'bling/vim-airline'
 set laststatus=2 " иначе не показывается на одном окне
+" let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='sol'
+" simple separators for buffer list
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_alt_sep = ''
+" don't count trailing whitespace since it lags in huge files
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+let g:airline_powerline_fonts=1
+
+Plugin 'edkolev/tmuxline.vim'
+let g:tmuxline_powerline_separators = 0
 
 Plugin 'trotzig/import-js'
 
@@ -110,9 +127,13 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " Clojurescript plugins
 Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-fireplace'
 Plugin 'guns/vim-clojure-highlight'
 Plugin 'tpope/vim-salve'
+
+" Coffeescript
+Plugin 'kchmck/vim-coffee-script'
 
 
 " Move swp? files to tmp directory
@@ -126,10 +147,21 @@ Plugin 'tpope/vim-salve'
 
 " All oa your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
-
 filetype on
+filetype plugin indent on    " required
 filetype plugin on
+
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd FileType c,cpp,java,php,ruby,python,js autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
+
 au BufNewFile,BufRead *.tt2 set filetype=html
 au BufNewFile,BufRead *.bemhtml set filetype=javascript
 au BufNewFile,BufRead *.cljs set filetype=clojure
+au BufNewFile,BufRead *.coffee set filetype=coffee
