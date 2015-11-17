@@ -10,12 +10,18 @@ Plugin 'gmarik/Vundle.vim'
 " colors
 set t_Co=256
 syntax on
-set background=light
+set background=dark
+colorscheme default
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+" Jump when search
+set incsearch
+" Toggle numbers
+:nmap <F12> :set invnumber<CR>
 
 " Bracket highlights
 Plugin 'luochen1990/rainbow'
@@ -43,6 +49,11 @@ let g:rainbow_conf = {
 \       'css': 0,
 \   }
 \}
+
+Plugin 'Chiel92/vim-autoformat'
+
+" XML (HTM)
+Plugin 'othree/xml.vim'
         
 " JSON highlight
 Plugin 'elzr/vim-json'
@@ -53,11 +64,11 @@ Bundle 'scrooloose/nerdtree'
 " Bundle 'jistr/vim-nerdtree-tabs'
 " " Open NERDTree on vim startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
-" nnoremap tc  :tabnew<CR>
+nnoremap tc  :tabnew<CR>
 " nnoremap th  :tabfirst<CR>
-" nnoremap tj  :tabnext<CR>
+nnoremap tl  :tabnext<CR>
 " nnoremap tk  :tablast<CR>
-" nnoremap tl  :tabprev<CR>
+nnoremap th  :tabprev<CR>
 " nnoremap tt  :tabedit<Space>
 " nnoremap tn  :tabnext<Space>
 " nnoremap tm  :tabm<Space>
@@ -88,7 +99,7 @@ Bundle 'kien/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-map <C-b> :CtrlPBuffer<CR>
+map <C-b> :CtrlPMRUFiles<CR>
 
 " Инденты
 set smartindent
@@ -96,12 +107,12 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-Bundle 'The-NERD-Commenter'
-
+Plugin 'The-NERD-Commenter'
+Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
-set laststatus=2 " иначе не показывается на одном окне
+set laststatus=2 " show when one window
 " let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='sol'
+let g:airline_theme='badwolf'
 " simple separators for buffer list
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
@@ -113,14 +124,23 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline_powerline_fonts=1
 
 Plugin 'edkolev/tmuxline.vim'
-let g:tmuxline_powerline_separators = 0
+let g:tmuxline_powerline_separators = 1
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['%R', '%a'],
+      \'z'    : '#H'}
 
 Plugin 'trotzig/import-js'
+Plugin 'heavenshell/vim-jsdoc'
 
 Plugin 'moll/vim-node'
 
 Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
+
+Plugin 'digitaltoad/vim-jade'
 
 Plugin 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
@@ -145,6 +165,9 @@ Plugin 'kchmck/vim-coffee-script'
 "set directory=/tmp/vim-tmp
 
 
+" Find and replace selected text
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " All oa your Plugins must be added before the following line
 call vundle#end()            " required
 filetype on
@@ -165,3 +188,4 @@ au BufNewFile,BufRead *.tt2 set filetype=html
 au BufNewFile,BufRead *.bemhtml set filetype=javascript
 au BufNewFile,BufRead *.cljs set filetype=clojure
 au BufNewFile,BufRead *.coffee set filetype=coffee
+au BufNewFile,BufRead *.jade set filetype=jade
