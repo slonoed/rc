@@ -92,7 +92,7 @@ Bundle 'surround.vim'
 Plugin 'tpope/vim-fugitive'
 
 " Edit parentheses
-" Plugin 'vim-scripts/paredit.vim'
+Plugin 'vim-scripts/paredit.vim'
 
 " Find files in curernt dir with ctrl+p
 Bundle 'kien/ctrlp.vim'
@@ -134,6 +134,13 @@ let g:tmuxline_preset = {
 
 Plugin 'trotzig/import-js'
 Plugin 'heavenshell/vim-jsdoc'
+
+" Snippets
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+" Optional:
+Plugin 'honza/vim-snippets'
 
 Plugin 'moll/vim-node'
 
