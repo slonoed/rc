@@ -108,7 +108,6 @@ set shiftwidth=2
 set expandtab
 
 Plugin 'The-NERD-Commenter'
-Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
 set laststatus=2 " show when one window
 " let g:airline#extensions#tabline#enabled = 1
@@ -163,6 +162,12 @@ Plugin 'tpope/vim-salve'
 Plugin 'kchmck/vim-coffee-script'
 
 
+" Http client
+Plugin 'aquach/vim-http-client'
+
+" Dash.app integration
+Plugin 'rizzatti/dash.vim'
+
 " Move swp? files to tmp directory
 " Usefull for soft like boot
 " boot rebuild if files added or changed  
@@ -180,6 +185,8 @@ call vundle#end()            " required
 filetype on
 filetype plugin indent on    " required
 filetype plugin on
+
+set cursorline
 
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
