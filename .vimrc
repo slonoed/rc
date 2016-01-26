@@ -7,11 +7,16 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+" Duo tome colors
+Plugin 'atelierbram/vim-colors_duotones'
+
 " colors
 set t_Co=256
-syntax on
+syntax enable
 set background=dark
-colorscheme default
+"colorscheme default
+colorscheme base16-duotone-darkearth
+
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
@@ -21,7 +26,10 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " Jump when search
 set incsearch
 " Toggle numbers
+:set number
 :nmap <F12> :set invnumber<CR>
+
+set mouse=a
 
 " Bracket highlights
 Plugin 'luochen1990/rainbow'
