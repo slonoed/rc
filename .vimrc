@@ -9,13 +9,18 @@ Plugin 'gmarik/Vundle.vim'
 
 " Duo tome colors
 Plugin 'atelierbram/vim-colors_duotones'
+Plugin 'chriskempson/base16-vim'
 
 " colors
+set term=xterm
+let base16colorspace=256  " Access colors present in 256 colorspace
 set t_Co=256
+let &t_AB="\e[48;5;%dm"
+let &t_AF="\e[38;5;%dm"
 syntax enable
 set background=dark
 "colorscheme default
-colorscheme base16-duotone-darkearth
+colorscheme base16-twilight
 
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
@@ -26,7 +31,7 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " Jump when search
 set incsearch
 " Toggle numbers
-:set number
+set number
 :nmap <F12> :set invnumber<CR>
 
 set mouse=a
@@ -78,7 +83,7 @@ nnoremap tl  :tabnext<CR>
 " nnoremap tk  :tablast<CR>
 nnoremap th  :tabprev<CR>
 " nnoremap tt  :tabedit<Space>
-" nnoremap tn  :tabnext<Space>
+nnoremap tn  :tabnext<Space>
 " nnoremap tm  :tabm<Space>
 " nnoremap td  :tabclose<CR>
 "
@@ -89,7 +94,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 Plugin 'mileszs/ack.vim'
 
-" open NERDTree for all tabs with Ctrl-n
+" open NERDTree for all tabs with Ctrl-t
 map <C-t> :NERDTreeToggle<CR>
 
 "Bundle 'L9'
@@ -119,7 +124,7 @@ Plugin 'The-NERD-Commenter'
 Plugin 'bling/vim-airline'
 set laststatus=2 " show when one window
 " let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='badwolf'
+let g:airline_theme='base16'
 " simple separators for buffer list
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
@@ -203,8 +208,7 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd FileType c,cpp,java,php,ruby,python,js autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,java,php,ruby,python,js,coffee autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 au BufNewFile,BufRead *.tt2 set filetype=html
 au BufNewFile,BufRead *.bemhtml set filetype=javascript
