@@ -1,0 +1,33 @@
+alias ll='ls -la'
+
+alias vim=nvim
+
+alias gs="git status"
+alias gl="git lg"
+
+alias cdb="cd ~/_repos/bearded/frontend"
+
+alias beardedrebuild="(cd /Users/slonoed/_repos/bearded/bearded && git pull && go get github.com/bearded-web/bearded && bearded dispatcher --frontend /Users/slonoed/_repos/bearded/frontend/build/ --with-agent)"
+
+alias tfront="./node_modules/.bin/mocha --require ./pretest.js -R spec \"app/**/*.t.js\""
+
+# Opens the github page for the current git repository in your browser
+# git@github.com:jasonneylon/dotfiles.git
+# https://github.com/jasonneylon/dotfiles/
+function gopen() {
+  giturl=$(git config --get remote.origin.url)
+  if [ "$giturl" == "" ]
+    then
+     echo "Not a git repository or no remote.origin.url set"
+     exit 1;
+  fi
+ 
+  giturl=${giturl/git\@github\.com\:/https://github.com/}
+  giturl=${giturl/\.git/\/tree/}
+  branch="$(git symbolic-ref HEAD 2>/dev/null)" ||
+  branch="(unnamed branch)"     # detached HEAD
+  branch=${branch##refs/heads/}
+  giturl=$giturl/$branch
+  #echo $giturl
+   open $giturl
+}

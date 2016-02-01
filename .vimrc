@@ -1,4 +1,3 @@
-set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -12,15 +11,29 @@ Plugin 'atelierbram/vim-colors_duotones'
 Plugin 'chriskempson/base16-vim'
 
 " colors
-set term=xterm
+"au VimEnter * set term=screen
 let base16colorspace=256  " Access colors present in 256 colorspace
-set t_Co=256
+"set t_Co=256
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 syntax enable
 set background=dark
 "colorscheme default
 colorscheme base16-twilight
+highlight LineNr ctermfg=DarkGray ctermbg=black
+Plugin 'bling/vim-airline'
+set laststatus=2 " show when one window
+" let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='base16'
+" simple separators for buffer list
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_alt_sep = ''
+" don't count trailing whitespace since it lags in huge files
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+let g:airline_powerline_fonts=1
 
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
@@ -121,19 +134,6 @@ set shiftwidth=2
 set expandtab
 
 Plugin 'The-NERD-Commenter'
-Plugin 'bling/vim-airline'
-set laststatus=2 " show when one window
-" let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='base16'
-" simple separators for buffer list
-"let g:airline_left_sep=''
-"let g:airline_right_sep=''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_alt_sep = ''
-" don't count trailing whitespace since it lags in huge files
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#branch#enabled = 1
-let g:airline_powerline_fonts=1
 
 Plugin 'edkolev/tmuxline.vim'
 let g:tmuxline_powerline_separators = 1
@@ -161,8 +161,9 @@ Plugin 'mattn/emmet-vim'
 
 Plugin 'digitaltoad/vim-jade'
 
-Plugin 'scrooloose/syntastic'
-let g:syntastic_javascript_checkers = ['eslint']
+Plugin 'benekastah/neomake'
+let g:neomake_javascript_enabled_makers = ['eslint', 'coffeelint', 'jsonlint', 'csslint']
+"autocmd! BufWritePost * Neomake
 
 " Clojurescript plugins
 Plugin 'guns/vim-clojure-static'
@@ -207,6 +208,7 @@ fun! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l, c)
 endfun
+
 
 autocmd FileType c,cpp,java,php,ruby,python,js,coffee autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
