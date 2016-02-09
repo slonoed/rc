@@ -6,6 +6,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+
 " Duo tome colors
 Plugin 'atelierbram/vim-colors_duotones'
 Plugin 'chriskempson/base16-vim'
@@ -106,6 +107,8 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 Plugin 'mileszs/ack.vim'
+" Use ag instead ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " open NERDTree for all tabs with Ctrl-t
 map <C-t> :NERDTreeToggle<CR>
@@ -116,6 +119,7 @@ Bundle 'surround.vim'
 
 " Git
 Plugin 'tpope/vim-fugitive'
+Plugin 'sjl/gundo.vim'
 
 " Edit parentheses
 Plugin 'vim-scripts/paredit.vim'
@@ -148,11 +152,11 @@ Plugin 'trotzig/import-js'
 Plugin 'heavenshell/vim-jsdoc'
 
 " Snippets
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
 " Optional:
-Plugin 'honza/vim-snippets'
+" Plugin 'honza/vim-snippets'
 
 Plugin 'moll/vim-node'
 
@@ -167,10 +171,10 @@ let g:neomake_javascript_enabled_makers = ['eslint', 'coffeelint', 'jsonlint', '
 
 " Clojurescript plugins
 Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-fireplace'
+"Plugin 'tpope/vim-classpath'
+"Plugin 'tpope/vim-fireplace'
 Plugin 'guns/vim-clojure-highlight'
-Plugin 'tpope/vim-salve'
+"Plugin 'tpope/vim-salve'
 
 " Coffeescript
 Plugin 'kchmck/vim-coffee-script'
@@ -210,7 +214,7 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 
-autocmd FileType c,cpp,java,php,ruby,python,js,coffee autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,java,php,ruby,python,js,coffee,clj,cljs autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 au BufNewFile,BufRead *.tt2 set filetype=html
 au BufNewFile,BufRead *.bemhtml set filetype=javascript
