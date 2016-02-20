@@ -1,15 +1,12 @@
 filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" vim-plug
+call plug#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
 
 
 " Duo tome colors
-Plugin 'atelierbram/vim-colors_duotones'
-Plugin 'chriskempson/base16-vim'
+Plug 'atelierbram/vim-colors_duotones'
+Plug 'chriskempson/base16-vim'
 
 " colors
 "au VimEnter * set term=screen
@@ -22,7 +19,8 @@ set background=dark
 "colorscheme default
 colorscheme base16-twilight
 highlight LineNr ctermfg=DarkGray ctermbg=black
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 set laststatus=2 " show when one window
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='base16'
@@ -51,7 +49,7 @@ set number
 set mouse=a
 
 " Bracket highlights
-Plugin 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 let g:rainbow_operators = 1
 let g:rainbow_conf = {
@@ -77,18 +75,18 @@ let g:rainbow_conf = {
 \   }
 \}
 
-Plugin 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 
 " XML (HTM)
-Plugin 'othree/xml.vim'
+Plug 'othree/xml.vim'
         
 " JSON highlight
-Plugin 'elzr/vim-json'
+Plug 'elzr/vim-json'
 
 
 " :NERDTree
-Bundle 'scrooloose/nerdtree'
-" Bundle 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+" Plug 'jistr/vim-nerdtree-tabs'
 " " Open NERDTree on vim startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
 nnoremap tc  :tabnew<CR>
@@ -106,26 +104,26 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 " Use ag instead ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " open NERDTree for all tabs with Ctrl-t
 map <C-t> :NERDTreeToggle<CR>
 
-"Bundle 'L9'
+"Plug 'L9'
 
-Bundle 'surround.vim'
+Plug 'surround.vim'
 
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'sjl/gundo.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
 
 " Edit parentheses
-Plugin 'vim-scripts/paredit.vim'
+Plug 'vim-scripts/paredit.vim'
 
 " Find files in curernt dir with ctrl+p
-Bundle 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
@@ -137,9 +135,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-Plugin 'The-NERD-Commenter'
+Plug 'The-NERD-Commenter'
 
-Plugin 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 let g:tmuxline_powerline_separators = 1
 let g:tmuxline_preset = {
       \'a'    : '#S',
@@ -148,43 +146,43 @@ let g:tmuxline_preset = {
       \'y'    : ['%R', '%a'],
       \'z'    : '#H'}
 
-Plugin 'trotzig/import-js'
-Plugin 'heavenshell/vim-jsdoc'
+Plug 'trotzig/import-js'
+Plug 'heavenshell/vim-jsdoc'
 
 " Snippets
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
-" Plugin 'garbas/vim-snipmate'
+" Plug 'MarcWeber/vim-addon-mw-utils'
+" Plug 'tomtom/tlib_vim'
+" Plug 'garbas/vim-snipmate'
 " Optional:
-" Plugin 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 
-Plugin 'moll/vim-node'
+Plug 'moll/vim-node'
 
-Plugin 'mxw/vim-jsx'
-Plugin 'mattn/emmet-vim'
+Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
 
-Plugin 'digitaltoad/vim-jade'
+Plug 'digitaltoad/vim-jade'
 
-Plugin 'benekastah/neomake'
+Plug 'benekastah/neomake'
 let g:neomake_javascript_enabled_makers = ['eslint', 'coffeelint', 'jsonlint', 'csslint']
 "autocmd! BufWritePost * Neomake
 
 " Clojurescript plugins
-Plugin 'guns/vim-clojure-static'
-"Plugin 'tpope/vim-classpath'
-"Plugin 'tpope/vim-fireplace'
-Plugin 'guns/vim-clojure-highlight'
-"Plugin 'tpope/vim-salve'
+Plug 'guns/vim-clojure-static'
+"Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-clojure-highlight'
+"Plug 'tpope/vim-salve'
 
 " Coffeescript
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 
 
 " Http client
-Plugin 'aquach/vim-http-client'
+Plug 'aquach/vim-http-client'
 
 " Dash.app integration
-Plugin 'rizzatti/dash.vim'
+Plug 'rizzatti/dash.vim'
 
 " Move swp? files to tmp directory
 " Usefull for soft like boot
@@ -198,8 +196,8 @@ Plugin 'rizzatti/dash.vim'
 " Find and replace selected text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-" All oa your Plugins must be added before the following line
-call vundle#end()            " required
+" All oa your Plugs must be added before the following line
+call plug#end()
 filetype on
 filetype plugin indent on    " required
 filetype plugin on
